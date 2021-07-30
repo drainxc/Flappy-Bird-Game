@@ -57,9 +57,19 @@ setInterval(function () {
     ctx.drawImage(bird, birdX, birdY);
 }, 100)
 
+function esc(event) {
+    if (event.key == 'Escape') {
+        game = false;
+    }
+    if (event.key == 'Enter') {
+        game = true;
+    }
+}
+
 function move() {
     jump = true;
 }
 
+document.addEventListener("keydown", esc);
 document.getElementById('playGame').addEventListener('click', play);
 document.addEventListener("click", move);
