@@ -9,6 +9,7 @@ let gravity = 5;
 let jump = false;
 let num = 0;
 let wing = 0;
+let game = false;
 
 let birdImg = [
     "../asset/bird1.jpg",
@@ -19,6 +20,32 @@ let birdImg = [
 
 pipe.src = "../asset/pipe.png";
 
+function play() {
+    game = true;
+    setInterval(function () {
+        if (game) {
+            ctx.clearRect(0, 0, 1520, 600);
+            ctx.drawImage(bird, birdX, birdY);
+            if (!jump) {
+                birdY += gravity;
+            }
+        }
+    }, 20);
+
+    setInterval(function () {
+        if (game) {
+            if (jump) {
+                birdY -= 10;
+                num++;
+            }
+            if (num > 10) {
+                num = 0;
+                jump = false;
+            }
+        }
+    }, 10);
+}
+
 setInterval(function () {
     bird.src = birdImg[wing];
     if (wing < 3) {
@@ -27,29 +54,12 @@ setInterval(function () {
     else {
         wing = 0;
     }
-}, 100)
-
-setInterval(function () {
-    ctx.clearRect(0, 0, 1520, 699);
     ctx.drawImage(bird, birdX, birdY);
-    if (!jump) {
-        birdY += gravity;
-    }
-}, 20);
-
-setInterval(function () {
-    if (jump) {
-        birdY -= 10;
-        num++;
-    }
-    if (num > 10) {
-        num = 0;
-        jump = false;
-    }
-}, 10);
+}, 100)
 
 function move() {
     jump = true;
 }
 
+document.getElementById('playGame').addEventListener('click', play);
 document.addEventListener("click", move);
