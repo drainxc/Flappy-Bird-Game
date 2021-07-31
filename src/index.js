@@ -7,7 +7,6 @@ let birdX = 100;
 let birdY = 100;
 let gravity = 5;
 let jump = false;
-let num = 0;
 let wing = 0;
 let game = false;
 
@@ -21,6 +20,7 @@ let birdImg = [
 pipe.src = "../asset/pipe.png";
 
 function play() {
+    let num = 0;
     game = true;
     setInterval(function () {
         if (game) {
@@ -57,12 +57,15 @@ setInterval(function () {
     ctx.drawImage(bird, birdX, birdY);
 }, 100)
 
-function esc(event) {
+function keyEvent(event) {
     if (event.key == 'Escape') {
         game = false;
     }
     if (event.key == 'Enter') {
         game = true;
+    }
+    if (event.key == 'r') {
+        location.reload();
     }
 }
 
@@ -70,6 +73,6 @@ function move() {
     jump = true;
 }
 
-document.addEventListener("keydown", esc);
+document.addEventListener("keydown", keyEvent);
 document.getElementById('playGame').addEventListener('click', play);
 document.addEventListener("click", move);
