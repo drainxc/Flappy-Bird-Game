@@ -13,7 +13,7 @@ let gravity = 7;
 let jump = false;
 let wing = 0;
 let game = false;
-let pipeX = 1000;
+let pipeX = 1520;
 let pipeY = 350;
 
 let birdImg = [
@@ -54,6 +54,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 jump = false;
             }
         }
+        pipeX -= 5;
     }, 10);
 
     setInterval(function () {
@@ -75,7 +76,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
 
     setInterval(function () {
         pipeY = getRandomIntInclusive(250, 550);
-    }, 3000);
+    }, 3200);
 });
 
 setInterval(function () {
