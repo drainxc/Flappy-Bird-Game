@@ -76,6 +76,9 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
 
     setInterval(function () {
         pipeY = getRandomIntInclusive(250, 550);
+        if (pipeX < 0) {
+            pipeX = 1520;
+        }
     }, 3200);
 });
 
