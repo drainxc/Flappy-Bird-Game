@@ -2,11 +2,13 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 canvas.width = 1520;
-canvas.height = 600;
+canvas.height = 598;
 
 let bird = new Image();
 let pipe = new Image();
 let reversePipe = new Image();
+let background = new Image();
+let floor = new Image();
 let birdX = 100;
 let birdY = 300;
 let gravity = 7;
@@ -27,6 +29,9 @@ let pipeImg = [
     "../asset/pipe.png",
     "../asset/reversePipe.png"
 ];
+background.src = "../asset/background.png";
+floor.src = "../asset/floor.png";
+
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -54,8 +59,9 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 num = 0;
                 jump = false;
             }
+            pipeX -= 5;
         }
-        pipeX -= 5;
+
     }, 10);
 
     setInterval(function () {
@@ -74,11 +80,11 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
     }, 20);
 
     setInterval(function () {
-        pipeY = getRandomIntInclusive(250, 550);
         if (pipeX < 0) {
+            pipeY = getRandomIntInclusive(250, 475);
             pipeX = 1520;
         }
-    }, 3200);
+    }, 10);
 });
 
 setInterval(function () {
@@ -108,9 +114,11 @@ function keyEvent(event) {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bird, birdX, birdY);
+    ctx.drawImage(background, 0, -25);
     ctx.drawImage(pipe, pipeX, pipeY);
     ctx.drawImage(reversePipe, pipeX, pipeY - 700);
+    ctx.drawImage(bird, birdX, birdY);
+    ctx.drawImage(floor, 0, 523);
 }
 
 function move() {
