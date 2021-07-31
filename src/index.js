@@ -1,6 +1,9 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+canvas.width = 1520;
+canvas.height = 600;
+
 let bird = new Image();
 let pipe = new Image();
 let birdX = 100;
@@ -19,22 +22,9 @@ let birdImg = [
 
 pipe.src = "../asset/pipe.png";
 
-function play() {
+oneTimeListener(document.getElementById('playGame'), 'click', function () {
     let num = 0;
     game = true;
-    setInterval(function () {
-        if (game) {
-            ctx.clearRect(0, 0, 1520, 600);
-            ctx.drawImage(bird, birdX, birdY);
-            if (!jump) {
-                birdY += gravity;
-            }
-        }
-        if (birdY < -40 || birdY > 450) {
-            game = false;
-        }
-    }, 20);
-
     setInterval(function () {
         if (game) {
             if (jump) {
@@ -47,7 +37,20 @@ function play() {
             }
         }
     }, 10);
-}
+
+    setInterval(function () {
+        if (game) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(bird, birdX, birdY);
+            if (!jump) {
+                birdY += gravity;
+            }
+        }
+        if (birdY < -40 || birdY > 450) {
+            game = false;
+        }
+    }, 20);
+});
 
 setInterval(function () {
     bird.src = birdImg[wing];
@@ -72,10 +75,16 @@ function keyEvent(event) {
     }
 }
 
+function oneTimeListener(element, type, callback) {
+    element.addEventListener(type, function () {
+        element.removeEventListener(type, arguments.callee);
+        return callback();
+    });
+}
+
 function move() {
     jump = true;
 }
 
 document.addEventListener("keydown", keyEvent);
-document.getElementById('playGame').addEventListener('click', play);
 document.addEventListener("click", move);
