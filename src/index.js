@@ -30,6 +30,9 @@ function play() {
                 birdY += gravity;
             }
         }
+        if (birdY < -40 || birdY > 450) {
+            game = false;
+        }
     }, 20);
 
     setInterval(function () {
@@ -58,10 +61,10 @@ setInterval(function () {
 }, 100)
 
 function keyEvent(event) {
-    if (event.key == 'Escape') {
+    if (event.key == 'Escape' && birdY > -40 && birdY < 450) {
         game = false;
     }
-    if (event.key == 'Enter') {
+    if (event.key == 'Enter' && birdY > -40 && birdY < 450) {
         game = true;
     }
     if (event.key == 'r') {
