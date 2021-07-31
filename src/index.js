@@ -7,20 +7,37 @@ canvas.height = 600;
 let bird = new Image();
 let pipe = new Image();
 let birdX = 100;
-let birdY = 100;
-let gravity = 5;
+let birdY = 300;
+let gravity = 7;
 let jump = false;
 let wing = 0;
 let game = false;
+let pipeX = 1000;
+let pipeY = 350;
+let pipenum = 0;
 
 let birdImg = [
     "../asset/bird1.jpg",
     "../asset/bird2.jpg",
     "../asset/bird3.jpg",
     "../asset/bird4.jpg"
-]
+];
+let pipeImg = [
+    "../asset/pipe.png"
+];
 
-pipe.src = "../asset/pipe.png";
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function oneTimeListener(element, type, callback) {
+    element.addEventListener(type, function () {
+        element.removeEventListener(type, arguments.callee);
+        return callback();
+    });
+}
 
 oneTimeListener(document.getElementById('playGame'), 'click', function () {
     let num = 0;
@@ -31,7 +48,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 birdY -= 10;
                 num++;
             }
-            if (num > 10) {
+            if (num > 15) {
                 num = 0;
                 jump = false;
             }
@@ -40,16 +57,22 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
 
     setInterval(function () {
         if (game) {
+            pipe.src = pipeImg[0];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(bird, birdX, birdY);
+            ctx.drawImage(pipe, pipeX, pipeY);
             if (!jump) {
                 birdY += gravity;
             }
         }
-        if (birdY < -40 || birdY > 450) {
+        if (birdY < -17.5 || birdY > 475) {
             game = false;
         }
     }, 20);
+
+    setInterval(function () {
+        pipeY = getRandomIntInclusive(150, 551);
+    }, 3000);
 });
 
 setInterval(function () {
@@ -64,22 +87,15 @@ setInterval(function () {
 }, 100)
 
 function keyEvent(event) {
-    if (event.key == 'Escape' && birdY > -40 && birdY < 450) {
+    if (event.key == 'Escape' && birdY > -17.5 && birdY < 475) {
         game = false;
     }
-    if (event.key == 'Enter' && birdY > -40 && birdY < 450) {
+    if (event.key == 'Enter' && birdY > -17.5 && birdY < 475) {
         game = true;
     }
     if (event.key == 'r') {
         location.reload();
     }
-}
-
-function oneTimeListener(element, type, callback) {
-    element.addEventListener(type, function () {
-        element.removeEventListener(type, arguments.callee);
-        return callback();
-    });
 }
 
 function move() {
