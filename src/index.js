@@ -12,6 +12,7 @@ let birdY = 300;
 let gravity = 7;
 let jump = false;
 let wing = 0;
+let winging = true;
 let game = false;
 let pipeX = 1520;
 let pipeY = 350;
@@ -61,16 +62,14 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
         if (game) {
             pipe.src = pipeImg[0];
             reversePipe.src = pipeImg[1];
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(bird, birdX, birdY);
-            ctx.drawImage(pipe, pipeX, pipeY);
-            ctx.drawImage(reversePipe, pipeX, pipeY - 700);
+            draw();
             if (!jump) {
                 birdY += gravity;
             }
         }
-        if (birdY < -17.5 || birdY > 475) {
+        if (birdY < -10 || birdY > 520) {
             game = false;
+            winging = false;
         }
     }, 20);
 
@@ -83,25 +82,35 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
 });
 
 setInterval(function () {
-    bird.src = birdImg[wing];
-    if (wing < 3) {
-        wing++;
-    }
-    else {
-        wing = 0;
+    if (winging) {
+        bird.src = birdImg[wing];
+        draw();
+        if (wing < 3) {
+            wing++;
+        }
+        else {
+            wing = 0;
+        }
     }
 }, 100)
 
 function keyEvent(event) {
-    if (event.key == 'Escape' && birdY > -17.5 && birdY < 475) {
+    if (event.key == 'Escape' && birdY > -10 && birdY < 520) {
         game = false;
     }
-    if (event.key == 'Enter' && birdY > -17.5 && birdY < 475) {
+    if (event.key == 'Enter' && birdY > -10 && birdY < 520) {
         game = true;
     }
     if (event.key == 'r') {
         location.reload();
     }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bird, birdX, birdY);
+    ctx.drawImage(pipe, pipeX, pipeY);
+    ctx.drawImage(reversePipe, pipeX, pipeY - 700);
 }
 
 function move() {
