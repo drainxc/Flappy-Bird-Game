@@ -6,6 +6,7 @@ canvas.height = 600;
 
 let bird = new Image();
 let pipe = new Image();
+let reversePipe = new Image();
 let birdX = 100;
 let birdY = 300;
 let gravity = 7;
@@ -14,7 +15,6 @@ let wing = 0;
 let game = false;
 let pipeX = 1000;
 let pipeY = 350;
-let pipenum = 0;
 
 let birdImg = [
     "../asset/bird1.jpg",
@@ -23,7 +23,8 @@ let birdImg = [
     "../asset/bird4.jpg"
 ];
 let pipeImg = [
-    "../asset/pipe.png"
+    "../asset/pipe.png",
+    "../asset/reversePipe.png"
 ];
 
 function getRandomIntInclusive(min, max) {
@@ -58,9 +59,11 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
     setInterval(function () {
         if (game) {
             pipe.src = pipeImg[0];
+            reversePipe.src = pipeImg[1];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(bird, birdX, birdY);
             ctx.drawImage(pipe, pipeX, pipeY);
+            ctx.drawImage(reversePipe, pipeX, pipeY - 700);
             if (!jump) {
                 birdY += gravity;
             }
@@ -71,7 +74,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
     }, 20);
 
     setInterval(function () {
-        pipeY = getRandomIntInclusive(150, 551);
+        pipeY = getRandomIntInclusive(250, 550);
     }, 3000);
 });
 
@@ -83,7 +86,6 @@ setInterval(function () {
     else {
         wing = 0;
     }
-    ctx.drawImage(bird, birdX, birdY);
 }, 100)
 
 function keyEvent(event) {
