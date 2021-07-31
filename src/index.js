@@ -17,10 +17,10 @@ let pipeX = 1520;
 let pipeY = 350;
 
 let birdImg = [
-    "../asset/bird1.jpg",
-    "../asset/bird2.jpg",
-    "../asset/bird3.jpg",
-    "../asset/bird4.jpg"
+    "../asset/bird1.png",
+    "../asset/bird2.png",
+    "../asset/bird3.png",
+    "../asset/bird4.png"
 ];
 let pipeImg = [
     "../asset/pipe.png",
