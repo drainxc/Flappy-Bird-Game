@@ -18,6 +18,7 @@ let winging = true;
 let game = false;
 let pipeX = 1520;
 let pipeY = 350;
+let floorX = 0;
 
 let birdImg = [
     "../asset/bird1.png",
@@ -60,6 +61,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 jump = false;
             }
             pipeX -= 5;
+            floorX -= 5;
         }
 
     }, 10);
@@ -83,6 +85,9 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
         if (pipeX < 0) {
             pipeY = getRandomIntInclusive(250, 475);
             pipeX = 1520;
+        }
+        if (floorX < -1520) {
+            floorX = 0;
         }
     }, 10);
 });
@@ -118,7 +123,7 @@ function draw() {
     ctx.drawImage(pipe, pipeX, pipeY);
     ctx.drawImage(reversePipe, pipeX, pipeY - 700);
     ctx.drawImage(bird, birdX, birdY);
-    ctx.drawImage(floor, 0, 523);
+    ctx.drawImage(floor, floorX, 523);
 }
 
 function move() {
