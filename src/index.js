@@ -63,7 +63,14 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
             pipeX -= 5;
             floorX -= 5;
         }
-
+        
+        if (pipeX < 0) {
+            pipeY = getRandomIntInclusive(250, 475);
+            pipeX = 1520;
+        }
+        if (floorX < -1520) {
+            floorX = 0;
+        }
     }, 10);
 
     setInterval(function () {
@@ -75,21 +82,11 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 birdY += gravity;
             }
         }
-        if (birdY < -10 || birdY > 520) {
+        if (birdY > 448 || birdX <= pipeX + 100 && birdX >= pipeX - 100 && (birdY >= pipeY - 50 || birdY <= pipeY - 250)) {
             game = false;
             winging = false;
         }
     }, 20);
-
-    setInterval(function () {
-        if (pipeX < 0) {
-            pipeY = getRandomIntInclusive(250, 475);
-            pipeX = 1520;
-        }
-        if (floorX < -1520) {
-            floorX = 0;
-        }
-    }, 10);
 });
 
 setInterval(function () {
@@ -106,10 +103,10 @@ setInterval(function () {
 }, 100)
 
 function keyEvent(event) {
-    if (event.key == 'Escape' && birdY > -10 && birdY < 520) {
+    if (event.key == 'Escape' && birdY < 448) {
         game = false;
     }
-    if (event.key == 'Enter' && birdY > -10 && birdY < 520) {
+    if (event.key == 'Enter' && birdY < 448) {
         game = true;
     }
     if (event.key == 'r') {
@@ -127,8 +124,10 @@ function draw() {
 }
 
 function move() {
-    jump = true;
+    if (birdY > -150) {
+        jump = true;
+    }
 }
 
-document.addEventListener("keydown", keyEvent);
+canvas.addEventListener("keydown", keyEvent);
 document.addEventListener("click", move);
