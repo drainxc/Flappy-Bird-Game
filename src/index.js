@@ -3,6 +3,9 @@ const ctx = canvas.getContext('2d');
 
 canvas.width = 1520;
 canvas.height = 598;
+ctx.lineWidth = 8;
+ctx.font = "40pt BM YEONSUNG OTF";
+ctx.fillStyle = 'white';
 
 let bird = new Image();
 let pipe = new Image();
@@ -11,7 +14,7 @@ let background = new Image();
 let floor = new Image();
 let birdX = 100;
 let birdY = 300;
-let gravity = 7;
+let gravity = 10;
 let jump = false;
 let wing = 0;
 let winging = true;
@@ -86,7 +89,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
                 birdY += gravity;
             } // 플레이어 중력 작용
         }
-        if (birdY > 448 || birdX <= pipeX + 100 && birdX >= pipeX - 100 && (birdY >= pipeY - 50 || birdY <= pipeY - 250)) {
+        if (birdY > 448 || birdX <= pipeX + 50 && birdX >= pipeX - 100 && (birdY >= pipeY - 50 || birdY <= pipeY - 250)) {
             game = false;
             winging = false;
         } // 게임 오버
@@ -126,7 +129,8 @@ function draw() {
     ctx.drawImage(reversePipe, pipeX, pipeY - 700);
     ctx.drawImage(bird, birdX, birdY);
     ctx.drawImage(floor, floorX, 523);
-    ctx.strokeText(point , 350, 100);
+    ctx.strokeText(point , 760, 100);
+    ctx.fillText(point, 760, 100);
 }
 
 function move() {
