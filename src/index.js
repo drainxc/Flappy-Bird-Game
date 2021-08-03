@@ -93,6 +93,12 @@ function gameStart() {
             } // 플레이어 중력 작용
         }
         if (birdY > 448 || birdX <= pipeX + 50 && birdX >= pipeX - 100 && (birdY >= pipeY - 50 || birdY <= pipeY - 250)) {
+            
+            if (game) { 
+                let music = new Audio('../asset/music/deadSound.mp3');
+                music.volume = 0.3;
+                music.play(); 
+            }
             game = false;
             winging = false;
         } // 게임 오버
@@ -141,7 +147,9 @@ function draw() {
 } // 그리기
 
 function move() {
-    new Audio('../asset/music/wingingSound.mp3').play();
+    let music = new Audio('../asset/music/wingingSound.mp3');
+    music.volume = 0.8;
+    music.play();
     if (birdY > -150) {
         jump = true;
     }
