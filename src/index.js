@@ -19,6 +19,7 @@ let game = false;
 let pipeX = 1520;
 let pipeY = 350;
 let floorX = 0;
+let point = 0;
 
 let birdImg = [
     "../asset/bird1.png",
@@ -86,6 +87,9 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
             game = false;
             winging = false;
         } // 게임 오버
+        if (birdX <= pipeX + 100 && birdX >= pipeX - 100) {
+            point++;
+        }
     }, 20);
 });
 
@@ -122,6 +126,7 @@ function draw() {
     ctx.drawImage(reversePipe, pipeX, pipeY - 700);
     ctx.drawImage(bird, birdX, birdY);
     ctx.drawImage(floor, floorX, 523);
+    ctx.strokeText(point , 350, 100);
 }
 
 function move() {
