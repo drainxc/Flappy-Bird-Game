@@ -13,3 +13,8 @@ button {
 body {
     margin: 0px;
 }
+
+#game {
+    display: flex;
+    justify-content: center;
+}
