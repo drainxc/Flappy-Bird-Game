@@ -78,7 +78,7 @@ function gameStart() {
             floorX = 0;
         } // 파이프 생성
         if (birdX == pipeX) {
-            new Audio('../asset/music/pointSound.mp3').play();
+            new Audio('../asset/music/pointSound.mp3').play(); // 점수 증가 사운드
             point++;
         } // 점수 증가
     }, 10);
@@ -93,12 +93,11 @@ function gameStart() {
             } // 플레이어 중력 작용
         }
         if (birdY > 448 || birdX <= pipeX + 50 && birdX >= pipeX - 100 && (birdY >= pipeY - 50 || birdY <= pipeY - 250)) {
-            
             if (game) { 
                 let music = new Audio('../asset/music/deadSound.mp3');
                 music.volume = 0.3;
                 music.play(); 
-            }
+            } // 사망 사운드
             game = false;
             winging = false;
         } // 게임 오버
@@ -132,7 +131,7 @@ function keyEvent(event) {
         if (birdY > -150) {
             jump = true;
         }
-    }
+    } // 점프 이벤트
 }
 
 function draw() {
@@ -149,10 +148,10 @@ function draw() {
 function move() {
     let music = new Audio('../asset/music/wingingSound.mp3');
     music.volume = 0.8;
-    music.play();
+    music.play(); // 날개짓 사운드
     if (birdY > -150) {
         jump = true;
-    }
+    } // 점프 이벤트
 } // 클릭 시 이벤트
 
 oneTimeListener(document.getElementById('playGame'), 'click', function () { gameStart(); });
