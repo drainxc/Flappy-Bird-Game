@@ -72,6 +72,9 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
         if (floorX < -1520) {
             floorX = 0;
         } // 파이프 생성
+        if (birdX == pipeX) {
+            point++;
+        }
     }, 10);
 
     setInterval(function () {
@@ -87,9 +90,6 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
             game = false;
             winging = false;
         } // 게임 오버
-        if (birdX <= pipeX + 100 && birdX >= pipeX - 100) {
-            point++;
-        }
     }, 20);
 });
 
