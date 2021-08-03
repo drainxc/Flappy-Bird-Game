@@ -73,13 +73,13 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
         if (pipeX < 0) {
             pipeY = getRandomIntInclusive(250, 475);
             pipeX = 1520;
-        }
+        } // 파이프 랜덤 위치
         if (floorX < -1520) {
             floorX = 0;
         } // 파이프 생성
         if (birdX == pipeX) {
             point++;
-        }
+        } // 점수 증가
     }, 10);
 
     setInterval(function () {
@@ -133,7 +133,7 @@ function draw() {
     ctx.drawImage(floor, floorX, 523);
     ctx.strokeText(point , 760, 100);
     ctx.fillText(point, 760, 100);
-}
+} // 그리기
 
 function move() {
     if (birdY > -150) {
