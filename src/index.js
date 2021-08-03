@@ -25,17 +25,17 @@ let floorX = 0;
 let point = 0;
 
 let birdImg = [
-    "../asset/bird1.png",
-    "../asset/bird2.png",
-    "../asset/bird3.png",
-    "../asset/bird4.png"
+    "../asset/img/bird1.png",
+    "../asset/img/bird2.png",
+    "../asset/img/bird3.png",
+    "../asset/img/bird4.png"
 ]; // 플레이어 애니메이션
 let pipeImg = [
-    "../asset/pipe.png",
-    "../asset/reversePipe.png"
+    "../asset/img/pipe.png",
+    "../asset/img/reversePipe.png"
 ]; // 파이프 이미지
-background.src = "../asset/background.png"; // 배경 이미지
-floor.src = "../asset/floor.png"; // 바닥 이미지
+background.src = "../asset/img/background.png"; // 배경 이미지
+floor.src = "../asset/img/floor.png"; // 바닥 이미지
 
 
 function getRandomIntInclusive(min, max) {
