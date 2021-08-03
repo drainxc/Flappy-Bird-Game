@@ -13,8 +13,8 @@ let reversePipe = new Image();
 let background = new Image();
 let floor = new Image();
 let birdX = 100;
-let birdY = 300;
-let gravity = 10;
+let birdY = 250;
+let gravity = 8;
 let jump = false;
 let wing = 0;
 let winging = true;
@@ -52,16 +52,18 @@ function oneTimeListener(element, type, callback) {
 } // 한 번만 실행
 
 oneTimeListener(document.getElementById('playGame'), 'click', function () {
-    let num = 0;
+    let num = 17;
     game = true;
     setInterval(function () {
         if (game) {
             if (jump) {
-                birdY -= 10;
-                num++;
+                birdY -= num;
+                num--;
+                gravity = 0;
             }
-            if (num > 15) {
-                num = 0;
+            if (num <= 0) {
+                gravity = 8;
+                num = 17;
                 jump = false;
             } // 클릭했을 시 점프 애니메이션
             pipeX -= 5;
@@ -110,13 +112,13 @@ setInterval(function () {
 }, 100)
 
 function keyEvent(event) {
+    console.log('asdf');
     if (event.key == 'Escape' && birdY < 448) {
         game = false;
     }
     if (event.key == 'Enter' && birdY < 448) {
         game = true;
     } // 게임 멈춤 & 스타트
-
     if (event.key == 'r') {
         location.reload();
     } // 다시 시작
@@ -139,5 +141,5 @@ function move() {
     }
 } // 클릭 시 이벤트
 
-canvas.addEventListener("keydown", keyEvent);
-document.addEventListener("click", move);
+document.addEventListener("keydown", keyEvent);
+canvas.addEventListener("click", move);
