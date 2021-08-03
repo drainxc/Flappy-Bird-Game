@@ -51,7 +51,7 @@ function oneTimeListener(element, type, callback) {
     });
 } // 한 번만 실행
 
-oneTimeListener(document.getElementById('playGame'), 'click', function () {
+function gameStart() {
     let num = 17;
     game = true;
     setInterval(function () {
@@ -96,7 +96,7 @@ oneTimeListener(document.getElementById('playGame'), 'click', function () {
             winging = false;
         } // 게임 오버
     }, 20);
-});
+}
 
 setInterval(function () {
     if (winging) {
@@ -141,5 +141,6 @@ function move() {
     }
 } // 클릭 시 이벤트
 
+oneTimeListener(document.getElementById('playGame'), 'click', function () { gameStart(); });
 document.addEventListener("keydown", keyEvent);
 canvas.addEventListener("click", move);
