@@ -13,7 +13,7 @@ let reversePipe = new Image();
 let background = new Image();
 let floor = new Image();
 let birdX = 100;
-let birdY = 250;
+let birdY = 100;
 let gravity = 8;
 let jump = false;
 let wing = 0;
@@ -112,7 +112,6 @@ setInterval(function () {
 }, 100)
 
 function keyEvent(event) {
-    console.log('asdf');
     if (event.key == 'Escape' && birdY < 448) {
         game = false;
     }
@@ -122,6 +121,11 @@ function keyEvent(event) {
     if (event.key == 'r') {
         location.reload();
     } // 다시 시작
+    if (event.key == ' ') {
+        if (birdY > -150) {
+            jump = true;
+        }
+    }
 }
 
 function draw() {
@@ -142,5 +146,5 @@ function move() {
 } // 클릭 시 이벤트
 
 oneTimeListener(document.getElementById('playGame'), 'click', function () { gameStart(); });
-document.addEventListener("keydown", keyEvent);
-canvas.addEventListener("click", move);
+document.addEventListener('keydown', keyEvent);
+canvas.addEventListener('click', move);
