@@ -78,6 +78,7 @@ function gameStart() {
             floorX = 0;
         } // 파이프 생성
         if (birdX == pipeX) {
+            new Audio('../asset/music/pointSound.mp3').play();
             point++;
         } // 점수 증가
     }, 10);
@@ -140,6 +141,7 @@ function draw() {
 } // 그리기
 
 function move() {
+    new Audio('../asset/music/wingingSound.mp3').play();
     if (birdY > -150) {
         jump = true;
     }
